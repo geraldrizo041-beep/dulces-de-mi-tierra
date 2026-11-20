@@ -28,9 +28,13 @@ section{padding:62px 22px}.section-inner{max-width:1120px;margin:auto}.section-h
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .card{background:white;border:1px solid #efdfca;border-radius:18px;overflow:hidden;box-shadow:0 8px 24px #5c3b2010;transition:transform .2s}
 .card:hover{transform:translateY(-4px)}
-.product-art{height:170px;display:flex;align-items:center;justify-content:center;font-size:4.4rem;background:linear-gradient(135deg,#f7e7c8,#efd0a0)}
-.card:nth-child(2) .product-art,.card:nth-child(5) .product-art{background:linear-gradient(135deg,#f3dfc8,#d7a875)}
-.card:nth-child(3) .product-art,.card:nth-child(6) .product-art{background:linear-gradient(135deg,#f9edcf,#e9d8a8)}
+.product-image{
+    width:100%;
+    height:190px;
+    object-fit:cover;
+    display:block;
+    background:#f7e7c8;
+}
 .card-body{padding:18px}.card h3{font-size:1.35rem;margin:0 0 8px}.card p{font: .9rem/1.5 Arial,sans-serif;color:var(--muted);min-height:42px;margin:0 0 16px}
 .card-bottom{display:flex;justify-content:space-between;align-items:center;gap:10px}.price{font:700 1.2rem Arial,sans-serif;color:var(--red)}
 .add{border:1px solid var(--red);background:white;color:var(--red);padding:9px 13px;border-radius:20px;cursor:pointer;font-weight:bold}.add:hover{background:var(--red);color:white}
@@ -95,21 +99,28 @@ footer{background:#382117;color:#d8c2aa;text-align:center;padding:20px;font: .8r
 </div>
 <script>
 const products=[
- {name:"Crocantes",price:110,emoji:"🍪",desc:"Un dulce tradicional, crujiente y lleno de sabor."},
- {name:"Cajeta de leche",price:110,emoji:"🥛",desc:"Dulzura cremosa inspirada en las recetas de siempre."},
- {name:"Suspiros",price:110,emoji:"☁️",desc:"Pequeños bocados dulces, ligeros y delicados."},
- {name:"Huevo chimbo",price:150,emoji:"🍯",desc:"Un clásico de la dulcería tradicional nicaragüense."},
- {name:"Piñonate",price:150,emoji:"🥜",desc:"Una preparación tradicional para disfrutar y compartir."},
- {name:"Coyolitos",price:110,emoji:"🥥",desc:"Un sabor de nuestra tierra que evoca la tradición."}
+ {name:"Crocantes",price:110,image:"images/crocantes.jpg.jpeg",desc:"Un dulce tradicional, crujiente y lleno de sabor."},
+ {name:"Cajeta de leche",price:110,image:"images/cajeta.jpg.jpeg",desc:"Dulzura cremosa inspirada en las recetas de siempre."},
+ {name:"Suspiros",price:110,image:"images/suspiros.jpg.jpeg",desc:"Pequeños bocados dulces, ligeros y delicados."},
+ {name:"Huevo chimbo",price:150,image:"images/huevo_chimbo.jpg.jpeg",desc:"Un clásico de la dulcería tradicional nicaragüense."},
+ {name:"Piñonate",price:150,image:"images/piñonate.jpg.jpeg",desc:"Una preparación tradicional para disfrutar y compartir."},
+ {name:"Coyolitos",price:110,image:"images/coyolitos.jpg.jpeg",desc:"Un sabor de nuestra tierra que evoca la tradición."}
 ];
 const cart={};
 const money=n=>"C$"+n.toLocaleString("es-NI");
-function renderProducts(){document.getElementById("product-grid").innerHTML=products.map((p,i)=>`
- <article class="card"><div class="product-art" aria-hidden="true">${p.emoji}</div><div class="card-body"><h3>${p.name}</h3><p>${p.desc}</p><div class="card-bottom"><span class="price">${money(p.price)}</span><button class="add" onclick="addToCart(${i})">Agregar +</button></div></div></article>`).join("");}
-function addToCart(i){cart[i]=(cart[i]||0)+1;renderCart();document.getElementById("cart-count").textContent=Object.values(cart).reduce((a,b)=>a+b,0);}
-function changeQty(i,d){cart[i]=(cart[i]||0)+d;if(cart[i]<=0)delete cart[i];renderCart();document.getElementById("cart-count").textContent=Object.values(cart).reduce((a,b)=>a+b,0);}
-function renderCart(){const entries=Object.entries(cart);const el=document.getElementById("cart-items");if(!entries.length){el.innerHTML='<div class="empty">Tu carrito está vacío. ¡Elegí un dulce para comenzar!</div>';document.getElementById("cart-total").textContent=money(0);return;}let total=0;el.innerHTML=entries.map(([key,q])=>{const p=products[+key];total+=p.price*q;return `<div class="cart-line"><div><strong>${p.name}</strong><br>${money(p.price)} c/u</div><div class="qty"><button onclick="changeQty(${key},-1)">−</button>${q}<button onclick="changeQty(${key},1)">+</button></div></div>`}).join("");document.getElementById("cart-total").textContent=money(total);}
-function toggleCart(open){document.getElementById("cart-panel").classList.toggle("open",open);if(open)renderCart();}
-renderProducts();renderCart();
+function renderProducts(){
+ document.getElementById("product-grid").innerHTML=products.map((p,i)=>`
+  <article class="card">
+   <img class="product-image" src="${p.image}" alt="${p.name}" loading="lazy">
+   <div class="card-body">
+    <h3>${p.name}</h3>
+    <p>${p.desc}</p>
+    <div class="card-bottom">
+     <span class="price">${money(p.price)}</span>
+     <button class="add" onclick="addToCart(${i})">Agregar +</button>
+    </div>
+   </div>
+  </article>`).join("");
+}
 </script>
 </body></html>
