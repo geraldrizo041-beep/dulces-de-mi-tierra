@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Dulces de Mi Tierra: dulces tradicionales nicaragüenses hechos para compartir nuestras raíces.">
+<title>Dulces de Mi Tierra | Tradición nicaragüense</title>
+<style>
+:root{--cream:#fff8eb;--paper:#fffdf8;--brown:#4d2d20;--brown2:#75452e;--red:#a6402b;--gold:#d49a39;--green:#526747;--muted:#806f60}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--brown);font-family:Georgia,"Times New Roman",serif}
+header{position:sticky;top:0;z-index:10;background:rgba(255,248,235,.96);backdrop-filter:blur(10px);border-bottom:1px solid #ead9c1}
+.nav{max-width:1120px;margin:auto;padding:14px 22px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{font-size:1.25rem;font-weight:bold;letter-spacing:.02em}.brand span{color:var(--red)}
+nav{display:flex;align-items:center;gap:22px}nav a{color:var(--brown);text-decoration:none;font-family:Arial,sans-serif;font-size:.9rem}nav a:hover{color:var(--red)}
+.cart-btn,.primary{border:0;background:var(--red);color:white;padding:11px 17px;border-radius:999px;cursor:pointer;font-weight:bold}
+.cart-btn:hover,.primary:hover{background:#853321}
+.hero{max-width:1120px;margin:0 auto;padding:68px 22px 58px;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:40px}
+.eyebrow{color:var(--green);text-transform:uppercase;letter-spacing:.16em;font:700 .75rem Arial,sans-serif}
+h1{font-size:clamp(2.7rem,6vw,5.1rem);line-height:.98;margin:16px 0;color:var(--brown);font-weight:700}
+h1 em{color:var(--red);font-style:normal}.hero p{font:1.08rem/1.7 Arial,sans-serif;color:var(--muted);max-width:520px}
+.hero-art{min-height:330px;border-radius:48% 48% 22px 22px;background:radial-gradient(circle at 50% 38%,#f7d99d 0 20%,transparent 21%),linear-gradient(145deg,#e8b96b,#b96b3d);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;box-shadow:inset 0 0 0 12px rgba(255,255,255,.18)}
+.hero-art:before,.hero-art:after{content:"";position:absolute;border:1px solid rgba(255,255,255,.5);border-radius:50%;width:260px;height:260px}
+.hero-art:after{width:310px;height:310px}
+.hero-sweets{font-size:5rem;z-index:1;filter:drop-shadow(0 12px 8px #75452e55);text-align:center;line-height:1.5}
+.hero-stamp{position:absolute;right:18px;bottom:18px;background:var(--paper);padding:13px 16px;border-radius:50%;font-size:.8rem;text-align:center;transform:rotate(8deg);box-shadow:0 4px 15px #603b2522}
+section{padding:62px 22px}.section-inner{max-width:1120px;margin:auto}.section-head{text-align:center;margin-bottom:32px}.section-head h2{font-size:clamp(2rem,4vw,3rem);margin:8px 0}.section-head p{font:1rem/1.6 Arial,sans-serif;color:var(--muted)}
+.products{background:var(--paper)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:white;border:1px solid #efdfca;border-radius:18px;overflow:hidden;box-shadow:0 8px 24px #5c3b2010;transition:transform .2s}
+.card:hover{transform:translateY(-4px)}
+.product-art{height:170px;display:flex;align-items:center;justify-content:center;font-size:4.4rem;background:linear-gradient(135deg,#f7e7c8,#efd0a0)}
+.card:nth-child(2) .product-art,.card:nth-child(5) .product-art{background:linear-gradient(135deg,#f3dfc8,#d7a875)}
+.card:nth-child(3) .product-art,.card:nth-child(6) .product-art{background:linear-gradient(135deg,#f9edcf,#e9d8a8)}
+.card-body{padding:18px}.card h3{font-size:1.35rem;margin:0 0 8px}.card p{font: .9rem/1.5 Arial,sans-serif;color:var(--muted);min-height:42px;margin:0 0 16px}
+.card-bottom{display:flex;justify-content:space-between;align-items:center;gap:10px}.price{font:700 1.2rem Arial,sans-serif;color:var(--red)}
+.add{border:1px solid var(--red);background:white;color:var(--red);padding:9px 13px;border-radius:20px;cursor:pointer;font-weight:bold}.add:hover{background:var(--red);color:white}
+.story{display:grid;grid-template-columns:.85fr 1.15fr;gap:44px;align-items:center}.story-art{background:#e9d6b7;border-radius:18px;padding:45px;text-align:center;font-size:5rem}
+.story h2{font-size:2.5rem;margin:10px 0}.story p{font:1rem/1.8 Arial,sans-serif;color:var(--muted)}
+.values{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}.values span{background:#e9eddf;color:var(--green);padding:9px 13px;border-radius:20px;font:700 .8rem Arial,sans-serif}
+.contact{background:#4d2d20;color:#fff8eb;text-align:center}.contact p{font:1rem/1.7 Arial,sans-serif;color:#ead8c4}.contact h2{font-size:2.5rem;margin:8px}
+footer{background:#382117;color:#d8c2aa;text-align:center;padding:20px;font: .8rem Arial,sans-serif}
+.cart-panel{position:fixed;inset:0;background:#1f140f88;z-index:30;display:none;justify-content:flex-end}.cart-panel.open{display:flex}
+.cart-content{width:min(420px,100%);background:var(--paper);height:100%;padding:24px;overflow:auto;box-shadow:-10px 0 35px #0002}
+.cart-head{display:flex;justify-content:space-between;align-items:center}.cart-head h2{margin:0}.close{border:0;background:#eee2d3;border-radius:50%;width:36px;height:36px;font-size:1.2rem;cursor:pointer}
+.cart-line{display:flex;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid #eadfce;font: .95rem Arial,sans-serif}
+.qty{display:flex;align-items:center;gap:8px}.qty button{border:1px solid #d9c7b1;background:white;border-radius:50%;width:25px;height:25px;cursor:pointer}
+.cart-total{display:flex;justify-content:space-between;font:700 1.1rem Arial,sans-serif;padding:20px 0}
+.notice{font: .85rem/1.5 Arial,sans-serif;color:var(--muted);background:#f5eddf;padding:12px;border-radius:10px}
+.empty{font:1rem Arial,sans-serif;color:var(--muted);padding:30px 0}
+@media(max-width:760px){.hero{grid-template-columns:1fr;padding-top:45px}.hero-art{min-height:250px}.grid{grid-template-columns:repeat(2,1fr)}.story{grid-template-columns:1fr}nav{gap:12px}nav a{font-size:.8rem}}
+@media(max-width:520px){.nav{flex-wrap:wrap}.brand{font-size:1.1rem}nav{order:3;width:100%;justify-content:space-between}.grid{grid-template-columns:1fr}.product-art{height:150px}.hero{gap:24px}section{padding:48px 17px}}
+</style>
+</head>
+<body>
+<header><div class="nav">
+  <div class="brand">Dulces <span>de Mi Tierra</span></div>
+  <nav><a href="#inicio">Inicio</a><a href="#dulces">Nuestros dulces</a><a href="#nosotros">Nosotros</a></nav>
+  <button class="cart-btn" onclick="toggleCart(true)">Mi carrito (<span id="cart-count">0</span>)</button>
+</div></header>
+
+<main>
+<section class="hero" id="inicio">
+  <div>
+    <div class="eyebrow">Tradición • Sabor • Nicaragua</div>
+    <h1>Un pedacito de <em>Nicaragua</em> en cada dulce.</h1>
+    <p>Descubrí los sabores que forman parte de nuestra cultura. En Dulces de Mi Tierra celebramos las recetas tradicionales y la dulzura de nuestras raíces.</p>
+    <a class="primary" href="#dulces" style="display:inline-block;text-decoration:none">Conocé nuestros dulces</a>
+  </div>
+  <div class="hero-art" aria-label="Ilustración decorativa de dulces tradicionales"><div class="hero-sweets">🍬 🥥<br>🍯 🍭</div><div class="hero-stamp">Sabor<br>nicaragüense</div></div>
+</section>
+
+<section class="products" id="dulces">
+ <div class="section-inner">
+  <div class="section-head"><div class="eyebrow">Hechos para disfrutar</div><h2>Nuestros dulces</h2><p>Elegí tu favorito y agregalo al carrito.</p></div>
+  <div class="grid" id="product-grid"></div>
+ </div>
+</section>
+
+<section id="nosotros"><div class="section-inner story">
+ <div class="story-art">🇳🇮 🍬</div>
+ <div><div class="eyebrow">Nuestra esencia</div><h2>Tradición que endulza generaciones</h2>
+ <p><strong>Dulces de Mi Tierra</strong> nace con el propósito de dar a conocer y valorar los dulces tradicionales nicaragüenses. Cada producto representa una parte de nuestra identidad, nuestras costumbres y esos sabores que nos conectan con el hogar.</p>
+ <div class="values"><span>Identidad nicaragüense</span><span>Tradición</span><span>Calidad y sabor</span></div></div>
+</div></section>
+
+<section class="contact"><div class="section-inner"><div class="eyebrow" style="color:#e6bd75">Dulces de Mi Tierra</div><h2>¡Gracias por apoyar lo nuestro!</h2><p>Compartí el sabor de nuestras tradiciones con familiares y amigos.</p></div></section>
+</main>
+<footer>© 2026 Dulces de Mi Tierra · Proyecto universitario · Nicaragua</footer>
+
+<div class="cart-panel" id="cart-panel" onclick="if(event.target===this)toggleCart(false)">
+ <div class="cart-content"><div class="cart-head"><h2>Tu carrito</h2><button class="close" onclick="toggleCart(false)" aria-label="Cerrar">×</button></div>
+ <div id="cart-items"></div><div class="cart-total"><span>Total</span><span id="cart-total">C$0</span></div>
+ <div class="notice">Esta es una tienda demostrativa para un proyecto universitario. El carrito permite mostrar una compra simulada; todavía no procesa pagos ni pedidos reales.</div>
+ </div>
+</div>
+<script>
+const products=[
+ {name:"Crocantes",price:110,emoji:"🍪",desc:"Un dulce tradicional, crujiente y lleno de sabor."},
+ {name:"Cajeta de leche",price:110,emoji:"🥛",desc:"Dulzura cremosa inspirada en las recetas de siempre."},
+ {name:"Suspiros",price:110,emoji:"☁️",desc:"Pequeños bocados dulces, ligeros y delicados."},
+ {name:"Huevo chimbo",price:150,emoji:"🍯",desc:"Un clásico de la dulcería tradicional nicaragüense."},
+ {name:"Piñonate",price:150,emoji:"🥜",desc:"Una preparación tradicional para disfrutar y compartir."},
+ {name:"Coyolitos",price:110,emoji:"🥥",desc:"Un sabor de nuestra tierra que evoca la tradición."}
+];
+const cart={};
+const money=n=>"C$"+n.toLocaleString("es-NI");
+function renderProducts(){document.getElementById("product-grid").innerHTML=products.map((p,i)=>`
+ <article class="card"><div class="product-art" aria-hidden="true">${p.emoji}</div><div class="card-body"><h3>${p.name}</h3><p>${p.desc}</p><div class="card-bottom"><span class="price">${money(p.price)}</span><button class="add" onclick="addToCart(${i})">Agregar +</button></div></div></article>`).join("");}
+function addToCart(i){cart[i]=(cart[i]||0)+1;renderCart();document.getElementById("cart-count").textContent=Object.values(cart).reduce((a,b)=>a+b,0);}
+function changeQty(i,d){cart[i]=(cart[i]||0)+d;if(cart[i]<=0)delete cart[i];renderCart();document.getElementById("cart-count").textContent=Object.values(cart).reduce((a,b)=>a+b,0);}
+function renderCart(){const entries=Object.entries(cart);const el=document.getElementById("cart-items");if(!entries.length){el.innerHTML='<div class="empty">Tu carrito está vacío. ¡Elegí un dulce para comenzar!</div>';document.getElementById("cart-total").textContent=money(0);return;}let total=0;el.innerHTML=entries.map(([key,q])=>{const p=products[+key];total+=p.price*q;return `<div class="cart-line"><div><strong>${p.name}</strong><br>${money(p.price)} c/u</div><div class="qty"><button onclick="changeQty(${key},-1)">−</button>${q}<button onclick="changeQty(${key},1)">+</button></div></div>`}).join("");document.getElementById("cart-total").textContent=money(total);}
+function toggleCart(open){document.getElementById("cart-panel").classList.toggle("open",open);if(open)renderCart();}
+renderProducts();renderCart();
+</script>
+</body></html>
