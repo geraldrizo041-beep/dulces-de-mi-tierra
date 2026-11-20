@@ -122,5 +122,58 @@ function renderProducts(){
    </div>
   </article>`).join("");
 }
+function addToCart(i){
+ cart[i]=(cart[i]||0)+1;
+ renderCart();
+ document.getElementById("cart-count").textContent=
+ Object.values(cart).reduce((a,b)=>a+b,0);
+}
+
+function changeQty(i,d){
+ cart[i]=(cart[i]||0)+d;
+ if(cart[i]<=0) delete cart[i];
+ renderCart();
+ document.getElementById("cart-count").textContent=
+ Object.values(cart).reduce((a,b)=>a+b,0);
+}
+
+function renderCart(){
+ const entries=Object.entries(cart);
+ const el=document.getElementById("cart-items");
+
+ if(!entries.length){
+  el.innerHTML='<div class="empty">Tu carrito está vacío. ¡Elegí un dulce para comenzar!</div>';
+  document.getElementById("cart-total").textContent=money(0);
+  return;
+ }
+
+ let total=0;
+
+ el.innerHTML=entries.map(([key,q])=>{
+  const p=products[+key];
+  total+=p.price*q;
+
+  return `<div class="cart-line">
+   <div><strong>${p.name}</strong><br>${money(p.price)} c/u</div>
+   <div class="qty">
+    <button onclick="changeQty(${key},-1)">−</button>
+    ${q}
+    <button onclick="changeQty(${key},1)">+</button>
+   </div>
+  </div>`;
+ }).join("");
+
+ document.getElementById("cart-total").textContent=money(total);
+}
+
+function toggleCart(open){
+ document.getElementById("cart-panel").classList.toggle("open",open);
+ if(open) renderCart();
+}
+
+renderProducts();
+renderCart();
+
+    
 </script>
 </body></html>
