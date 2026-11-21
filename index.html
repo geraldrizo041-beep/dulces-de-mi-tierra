@@ -11,6 +11,17 @@
 header{position:sticky;top:0;z-index:10;background:rgba(255,248,235,.96);backdrop-filter:blur(10px);border-bottom:1px solid #ead9c1}
 .nav{max-width:1120px;margin:auto;padding:14px 22px;display:flex;align-items:center;justify-content:space-between;gap:20px}
 .brand{font-size:1.25rem;font-weight:bold;letter-spacing:.02em}.brand span{color:var(--red)}
+    .brand-wrap{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.brand-logo{
+  width:52px;
+  height:52px;
+  object-fit:contain;
+  border-radius:50%;
+}
 nav{display:flex;align-items:center;gap:22px}nav a{color:var(--brown);text-decoration:none;font-family:Arial,sans-serif;font-size:.9rem}nav a:hover{color:var(--red)}
 .cart-btn,.primary{border:0;background:var(--red);color:white;padding:11px 17px;border-radius:999px;cursor:pointer;font-weight:bold}
 .cart-btn:hover,.primary:hover{background:#853321}
@@ -57,8 +68,16 @@ footer{background:#382117;color:#d8c2aa;text-align:center;padding:20px;font: .8r
 </head>
 <body>
 <header><div class="nav">
+<div class="brand-wrap">
+  <img class="brand-logo" src="images/logo_dulces.jpeg" alt="Logotipo de Dulces de Mi Tierra">
   <div class="brand">Dulces <span>de Mi Tierra</span></div>
-  <nav><a href="#inicio">Inicio</a><a href="#dulces">Nuestros dulces</a><a href="#nosotros">Nosotros</a></nav>
+</div>
+  <nav>
+  <a href="#inicio">Inicio</a>
+  <a href="#dulces">Nuestros dulces</a>
+  <a href="#nosotros">Nosotros</a>
+  <a href="#contacto">Contacto</a>
+</nav>
   <button class="cart-btn" onclick="toggleCart(true)">Mi carrito (<span id="cart-count">0</span>)</button>
 </div></header>
 
@@ -87,8 +106,21 @@ footer{background:#382117;color:#d8c2aa;text-align:center;padding:20px;font: .8r
  <div class="values"><span>Identidad nicaragüense</span><span>Tradición</span><span>Calidad y sabor</span></div></div>
 </div></section>
 
-<section class="contact"><div class="section-inner"><div class="eyebrow" style="color:#e6bd75">Dulces de Mi Tierra</div><h2>¡Gracias por apoyar lo nuestro!</h2><p>Compartí el sabor de nuestras tradiciones con familiares y amigos.</p></div></section>
-</main>
+<section class="contact"><div class="section-inner"><div class="eyebrow" <section class="contact" id="contacto">
+  <div class="section-inner">
+    <div class="eyebrow" style="color:#e6bd75">
+      Dulces de Mi Tierra
+    </div>
+
+    <h2>¡Gracias por apoyar lo nuestro!</h2>
+
+    <p>Compartí el sabor de nuestras tradiciones con familiares y amigos.</p>
+
+    <p><strong>Dirección:</strong> Palacagüina, Madriz, Nicaragua.</p>
+
+    <p><strong>Teléfono:</strong> 8904 3393</p>
+  </div>
+</section>
 <footer>© 2026 Dulces de Mi Tierra · Proyecto universitario · Nicaragua</footer>
 
 <div class="cart-panel" id="cart-panel" onclick="if(event.target===this)toggleCart(false)">
